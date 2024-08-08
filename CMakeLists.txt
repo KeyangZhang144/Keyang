@@ -5,19 +5,19 @@ cmake_minimum_required(VERSION 3.13)
 include(pico_sdk_import.cmake)
 
 project(pidrobot)
-
+#set(PICO_BOARD pico_w)
 # initialize the Raspberry Pi Pico SDK
 pico_sdk_init()
 add_executable(main
     main.c
+    hcsr04.c
 )
-
+target_include_directories(main PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/include
+)
 # Add pico_stdlib library which aggregates commonly used features
-target_link_libraries(main pico_stdlib)
+target_link_libraries(main pico_stdlib pico_cyw43_arch_none)
 
-# enable usb output, disable uart output
-pico_enable_stdio_usb(main 1)
-pico_enable_stdio_uart(main 0)
 # create map/bin/hex/uf2 file in addition to ELF.
 pico_add_extra_outputs(main)
 
