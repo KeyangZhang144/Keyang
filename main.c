@@ -11,13 +11,12 @@
 int main() {
     timer_hw->dbgpause = 0;
     stdio_init_all();
-    int distance;
+    double distance;
     while(true){
         hcsr04_init();
         distance = hcsr04_get_distance();
-        printf("distance : %d\n", distance);
-        //printf("distance : %.2f\n", distance);
-        busy_wait_ms(500);
+        printf("distance : %.4f\n", distance);
+        busy_wait_ms(100);
     }
 /*    while (true) {
         cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);

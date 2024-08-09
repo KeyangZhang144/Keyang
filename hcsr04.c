@@ -10,9 +10,9 @@ void hcsr04_init(){
     gpio_set_dir (TRIG_PIN, GPIO_OUT);
     gpio_put (TRIG_PIN, false);
 }
-int hcsr04_get_distance(){
+double hcsr04_get_distance(){
     // hcsr04_get_distance returns the distance measured by the sensor in meters
-    int time0;
+    double time0;
     absolute_time_t time1, time2;
     // fire ultrasonic signal
     gpio_put(TRIG_PIN, true);
@@ -23,6 +23,6 @@ int hcsr04_get_distance(){
     while (!gpio_get(ECHO_PIN));
     time2 = get_absolute_time();
     time0 = absolute_time_diff_us(time1, time2);
-    time0 *= 170;
+    time0 *= 0.017;
     return time0;
 }
